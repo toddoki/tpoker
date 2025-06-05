@@ -418,6 +418,96 @@
             #tutorial-message-box h3 { font-size: 1.1em; }
             #tutorial-message-box p { font-size: 0.9em; }
         }
+/* --- 모바일 환경에서 AI3 (오른쪽 플레이어) 피드백 위치 조정 --- */
+@media (max-width: 768px) {
+    /* AI3 (일반적으로 player-slot-3)의 피드백을 왼쪽으로 표시 */
+    #player-slot-3 .enhanced-feedback {
+        left: auto; /* 기존 left 속성 제거 */
+        right: calc(100% + 5px); /* 슬롯 오른쪽에 공간을 두고 왼쪽으로 붙임 */
+        transform: translateY(-50%) scale(0.8) translateX(-100%); /* 위치 및 초기 스케일 조정 */
+    }
+
+    #player-slot-3 .enhanced-feedback.show {
+        transform: translateY(-50%) scale(1.1) translateX(-100%); /* 나타날 때 위치 */
+    }
+
+    #player-slot-3 .enhanced-feedback.fade-out {
+        transform: translateY(-50%) translateX(calc(-100% - 10px)) scale(0.7); /* 사라질 때 위치 */
+    }
+
+    /* 모든 enhanced-feedback에 대한 추가 스타일 (내용 잘림 방지) */
+    .enhanced-feedback {
+        max-width: 90px; /* 최대 너비 제한 (필요에 따라 조절, 이전 100px에서 약간 줄임) */
+        word-break: keep-all; /* 단어 단위 줄바꿈 (한글의 경우) */
+        white-space: normal; /* 여러 줄로 표시되도록 */
+        text-align: center; /* 텍스트 중앙 정렬 */
+        /* 피드백 박스 자체의 패딩을 줄여서 공간 확보 시도 */
+        padding: 3px 6px; 
+    }
+
+    /* --- 모바일에서 카드 크기 및 간격 미세 조정 (4인 기준) --- */
+    .game-table {
+        /* 패딩을 조금 더 줄여서 내부 컨텐츠 공간 확보 */
+        /* padding: 10px 3px; */ /* 너무 줄이면 답답해 보일 수 있음 */
+    }
+
+    .player-slot {
+        min-width: 85px; /* 기존 100px, 이전 제안 90px에서 조금 더 줄임 */
+        padding: 3px 1px; /* 좌우 패딩 최소화 */
+    }
+    
+    /* 플레이어 카드 컨테이너 */
+    .player-slot .cards-container {
+        gap: 2px; /* 카드 간 간격 줄임 (기존 5px) */
+    }
+
+    /* 모바일에서 카드 크기를 아주 약간 줄이는 방법 */
+    /* 이 스타일은 모든 플레이어 슬롯의 카드에 영향을 줍니다. */
+    .player-slot .card {
+        width: 36px;  /* 기존 40px에서 줄임 */
+        height: 54px; /* 비율에 맞춰 줄임 (기존 60px) */
+        font-size: 11px; /* 카드 내 폰트도 약간 줄임 */
+    }
+    .player-slot .card .rank { 
+        font-size: 12px; /* 기존 14px에서 줄임 */
+    }
+    .player-slot .card .suit { 
+        font-size: 10px; /* 기존 12px에서 줄임 */
+    }
+}
+
+/* 더 작은 화면 (e.g., 480px 이하)에 대한 추가 조정 */
+@media (max-width: 480px) {
+    #player-slot-3 .enhanced-feedback {
+        right: calc(100% + 2px); /* 간격 더 줄임 */
+        font-size: 1.0em !important; /* 피드백 폰트 더 줄임 */
+        max-width: 70px; /* 최대 너비 더 줄임 */
+        padding: 2px 4px;
+    }
+    #player-slot-3 .enhanced-feedback.show {
+        font-size: 1.2em !important;
+    }
+    #player-slot-3 .enhanced-feedback.fade-out {
+        font-size: 0.8em !important;
+    }
+
+    .player-slot {
+        min-width: 70px; /* 더 줄임 */
+        min-height: 75px; /* 높이도 약간 줄임 */
+    }
+
+    .player-slot .cards-container {
+        gap: 1px; /* 카드 간 간격 최소화 */
+    }
+    
+    .player-slot .card {
+        width: 30px; 
+        height: 45px; 
+        font-size: 9px;
+    }
+    .player-slot .card .rank { font-size: 10px; }
+    .player-slot .card .suit { font-size: 8px; }
+}    
     </style>
 </head>
 <body>
